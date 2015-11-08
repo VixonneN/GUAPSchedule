@@ -21,7 +21,7 @@ import ru.vlad805.guap.schedule.utils.API;
 import ru.vlad805.guap.schedule.utils.APICallback;
 import ru.vlad805.guap.schedule.utils.APIError;
 import ru.vlad805.guap.schedule.Day;
-import ru.vlad805.guap.schedule.views.DayLayout;
+import ru.vlad805.guap.schedule.views.DayView;
 import ru.vlad805.guap.schedule.R;
 import ru.vlad805.guap.schedule.adapters.ScheduleAdapter;
 import ru.vlad805.guap.schedule.utils.Utils;
@@ -118,10 +118,10 @@ public class ScheduleListFragment extends Fragment {
 
 		CardView s = ((CardView) getActivity().findViewById(R.id.content_settings));
 
-		s.setContentPadding(DayLayout.PADDING_LR, DayLayout.PADDING_TB, DayLayout.PADDING_LR, DayLayout.PADDING_TB);
+		s.setContentPadding(DayView.PADDING_LR, DayView.PADDING_TB, DayView.PADDING_LR, DayView.PADDING_TB);
 
-		LinearLayout.LayoutParams lp = DayLayout.getDefaultLayoutParams(DayLayout.MATCH_PARENT, DayLayout.WRAP_CONTENT);
-		lp.setMargins(DayLayout.MARGIN_LR, DayLayout.MARGIN_TB, DayLayout.MARGIN_LR, DayLayout.MARGIN_TB);
+		LinearLayout.LayoutParams lp = DayView.getDefaultLayoutParams(DayView.MATCH_PARENT, DayView.WRAP_CONTENT);
+		lp.setMargins(DayView.MARGIN_LR, DayView.MARGIN_TB, DayView.MARGIN_LR, DayView.MARGIN_TB);
 		s.setLayoutParams(lp);
 		s.setVisibility(View.VISIBLE);
 
@@ -151,11 +151,11 @@ public class ScheduleListFragment extends Fragment {
 		Activity act = getActivity();
 		LinearLayout list = new LinearLayout(act);
 		list.setOrientation(LinearLayout.VERTICAL);
-		DayLayout itemLayout;
+		DayView itemLayout;
 
 		byte j = 0;
 		for (Day i : data.schedule) {
-			itemLayout = new DayLayout(act);
+			itemLayout = new DayView(act);
 			itemLayout.setDay(data, j++, isParityNow);
 
 			list.addView(itemLayout);
