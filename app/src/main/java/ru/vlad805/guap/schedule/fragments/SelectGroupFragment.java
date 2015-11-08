@@ -28,6 +28,10 @@ import ru.vlad805.guap.schedule.utils.Utils;
  */
 public class SelectGroupFragment extends Fragment implements View.OnClickListener {
 
+    public interface GroupSelectedListener {
+        void onGroupSelected();
+    }
+
     private View root;
     private ArrayList<String> items = new ArrayList<>();
     private Spinner spinner;
@@ -88,7 +92,11 @@ public class SelectGroupFragment extends Fragment implements View.OnClickListene
                 String group = spinner.getSelectedItem().toString();
                 u.setString(DrawerActivity.KEY_GID, group);
                 startActivity(new Intent(getContext(), DrawerActivity.class));
-                getActivity().finish();//TODO: bad stuff
+                if (getActivity() instanceof GroupSelectedListener) {
+                    ((GroupSelectedListener) getActivity()).onGroupSelected();
+                } else {
+                    throw new IllegalStateException("Activity must implement GroupSelectedListener");
+                }
         }
     }
 }

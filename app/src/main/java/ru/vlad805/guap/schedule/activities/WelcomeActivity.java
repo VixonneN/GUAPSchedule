@@ -5,7 +5,7 @@ import android.os.Bundle;
 import ru.vlad805.guap.schedule.R;
 import ru.vlad805.guap.schedule.fragments.SelectGroupFragment;
 
-public class WelcomeActivity extends BaseActivity {
+public class WelcomeActivity extends BaseActivity implements SelectGroupFragment.GroupSelectedListener{
 
 	@Override
 	protected int getContentView() {
@@ -22,4 +22,8 @@ public class WelcomeActivity extends BaseActivity {
 		}
 	}
 
+	@Override
+	public void onGroupSelected() {
+		finish();
+	}
 }
