@@ -30,8 +30,17 @@ public class Schedule {
 
         }
 
+        public static class CoupleTime {
+
+            public int coupleId;
+            public String start;
+            public String end;
+
+        }
+
         public String parseDate;
         public List<Day> schedule;
+        public List<CoupleTime> couples;
 
     }
 
