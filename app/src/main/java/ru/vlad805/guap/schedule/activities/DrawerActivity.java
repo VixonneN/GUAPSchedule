@@ -43,7 +43,7 @@ public class DrawerActivity
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		if (fragmentManager.findFragmentById(R.id.container) == null) {
 			fragmentManager.beginTransaction()
-					.add(R.id.container, ScheduleListFragment.newInstance(false))
+					.add(R.id.container, ScheduleListFragment.newInstance())
 					.commit();
 		}
 	}

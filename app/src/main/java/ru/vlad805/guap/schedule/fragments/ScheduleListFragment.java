@@ -18,13 +18,6 @@ import java.util.HashMap;
 
 import mjson.Json;
 import ru.vlad805.guap.schedule.R;
-import ru.vlad805.guap.schedule.activities.MainActivity;
-import ru.vlad805.guap.schedule.adapters.ScheduleAdapter;
-import ru.vlad805.guap.schedule.utils.API;
-import ru.vlad805.guap.schedule.utils.APICallback;
-import ru.vlad805.guap.schedule.utils.APIError;
-import ru.vlad805.guap.schedule.Day;
-import ru.vlad805.guap.schedule.R;
 import ru.vlad805.guap.schedule.activities.DrawerActivity;
 import ru.vlad805.guap.schedule.adapters.ScheduleAdapter;
 import ru.vlad805.guap.schedule.utils.API;
