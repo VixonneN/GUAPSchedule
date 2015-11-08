@@ -5,9 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
-import java.util.Calendar;
-import java.util.Date;
-
 public class Utils {
 
 	private Context context;
@@ -47,11 +44,11 @@ public class Utils {
 		return sb.toString();
 	}
 
-	public static boolean isParity () {
+	/*public static boolean isParity () {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 		return (cal.get(Calendar.WEEK_OF_YEAR) % 2) > 0;
-	}
+	}*/
 
 	public ProgressDialog showProgress (String text) {
 		return showProgress(null, text);

@@ -17,6 +17,12 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 import mjson.Json;
+import ru.vlad805.guap.schedule.R;
+import ru.vlad805.guap.schedule.activities.MainActivity;
+import ru.vlad805.guap.schedule.adapters.ScheduleAdapter;
+import ru.vlad805.guap.schedule.utils.API;
+import ru.vlad805.guap.schedule.utils.APICallback;
+import ru.vlad805.guap.schedule.utils.APIError;
 import ru.vlad805.guap.schedule.Day;
 import ru.vlad805.guap.schedule.R;
 import ru.vlad805.guap.schedule.activities.DrawerActivity;
@@ -33,8 +39,9 @@ public class ScheduleListFragment extends Fragment {
 	private int isParityNow;
 	private ProgressDialog progress;
 	private boolean loaded = false;
+	private ScheduleAdapter globalData;
 
-	public static ScheduleListFragment newInstance (boolean onlyTomorrow) {
+	public static ScheduleListFragment newInstance () {
 		ScheduleListFragment fragment = new ScheduleListFragment();
 		Bundle args = new Bundle();
 		fragment.setArguments(args);
@@ -81,8 +88,6 @@ public class ScheduleListFragment extends Fragment {
 		super.onDetach();
 	}
 
-
-
 	public void loadAll (String groupId) {
 
 		HashMap<String, String> params = new HashMap<>();
@@ -90,6 +95,7 @@ public class ScheduleListFragment extends Fragment {
 
 		progress = u.showProgress(getString(R.string.alert_updating));
 		loaded = true;
+
 		API.invoke(getContext(), "guap.parseSchedule", params, new APICallback() {
 			@Override
 			public void onResult(Json result) {
@@ -125,8 +131,6 @@ public class ScheduleListFragment extends Fragment {
 		s.setLayoutParams(lp);
 		s.setVisibility(View.VISIBLE);
 
-		Calendar c = Calendar.getInstance();
-		int w = c.get(Calendar.WEEK_OF_YEAR);
 		isParityNow = (Calendar.getInstance().get(Calendar.WEEK_OF_YEAR) % 2) + 1;
 
 		Switch sw = (Switch) getActivity().findViewById(R.id.switcher_parity);
@@ -142,8 +146,6 @@ public class ScheduleListFragment extends Fragment {
 		});
 	}
 
-	private ScheduleAdapter globalData;
-
 	public void show (ScheduleAdapter data) {
 
 		globalData = data;
@@ -153,8 +155,9 @@ public class ScheduleListFragment extends Fragment {
 		list.setOrientation(LinearLayout.VERTICAL);
 		DayView itemLayout;
 
-		byte j = 0;
-		for (Day i : data.schedule) {
+		int l = data.schedule.length;
+
+		for (byte j = 0; j < l; ++j) {
 			itemLayout = new DayView(act);
 			itemLayout.setDay(data, j++, isParityNow);
 

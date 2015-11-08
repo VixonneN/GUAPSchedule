@@ -67,7 +67,4 @@ public class Internet {
 	public boolean isNetworkAvailable () {
 		return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
 	}
-	/*public static boolean isNetworkAvailable (Context context) {
-		return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
-	}*/
 }

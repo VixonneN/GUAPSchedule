@@ -23,6 +23,8 @@ public class SelectGroupActivity extends AppCompatActivity implements View.OnCli
 
 	private Utils u;
 	private ProgressDialog progress;
+	private ArrayList<String> items = new ArrayList<>();
+	private Spinner spinner;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +48,11 @@ public class SelectGroupActivity extends AppCompatActivity implements View.OnCli
 				u.toast(getString(R.string.alert_nointernet_nogroups));
 			}
 		});
+
 		findViewById(R.id.select_submit).setOnClickListener(this);
 	}
 
-	private ArrayList<String> items = new ArrayList<>();
-	private Spinner spinner;
-
 	public void showItems (List<Json> data) {
-
 		for (Json item : data) {
 			items.add(item.at("groupId").asString());
 		}
