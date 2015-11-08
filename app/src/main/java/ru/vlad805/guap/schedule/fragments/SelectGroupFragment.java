@@ -1,12 +1,10 @@
 package ru.vlad805.guap.schedule.fragments;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,22 +13,15 @@ import android.widget.Spinner;
 
 import com.google.common.collect.Lists;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import mjson.Json;
 import ru.vlad805.guap.schedule.R;
 import ru.vlad805.guap.schedule.activities.DrawerActivity;
 import ru.vlad805.guap.schedule.api.Groups;
 import ru.vlad805.guap.schedule.api.RestApiImpl;
-import ru.vlad805.guap.schedule.utils.API;
-import ru.vlad805.guap.schedule.utils.APICallback;
-import ru.vlad805.guap.schedule.utils.APIError;
 import ru.vlad805.guap.schedule.utils.Utils;
 
 /**

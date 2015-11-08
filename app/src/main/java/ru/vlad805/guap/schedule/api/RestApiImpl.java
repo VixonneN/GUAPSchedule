@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
-import ru.vlad805.guap.schedule.utils.API;
 
 /**
  * Created by arktic on 08.11.15.

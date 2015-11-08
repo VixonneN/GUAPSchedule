@@ -9,10 +9,10 @@ import retrofit.http.Query;
  */
 public interface RestApi {
 
-    @GET("/guap.parseSchedule")
-    Schedule parseSchedule(@Query("groupId") int groupId);
+    @GET("/guap.parseSchedule?v=2.01")
+    Call<Schedule> parseSchedule(@Query("groupId") String groupId);
 
-    @GET("/guap.getGroups")
+    @GET("/guap.getGroups?v=2.01")
     Call<Groups> getGroups();
 
 }

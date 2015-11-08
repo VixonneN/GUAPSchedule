@@ -8,17 +8,15 @@ import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import ru.vlad805.guap.schedule.Couple;
-import ru.vlad805.guap.schedule.CoupleTime;
-import ru.vlad805.guap.schedule.Day;
 import ru.vlad805.guap.schedule.R;
-import ru.vlad805.guap.schedule.adapters.ScheduleAdapter;
+import ru.vlad805.guap.schedule.api.Schedule;
+import ru.vlad805.guap.schedule.utils.Utils;
 
 public class DayView extends android.support.v7.widget.CardView {
 
 	private Context context;
-	private ScheduleAdapter adapter;
-	private Day day;
+	private Schedule adapter;
+	private Schedule.Response.Day day;
 
 
 	public DayView(Context ctx) {
@@ -32,9 +30,9 @@ public class DayView extends android.support.v7.widget.CardView {
 	final public static int PADDING_TB = 14;
 	final public static int PADDING_LR = 20;
 
-	public void setDay (ScheduleAdapter a, byte i, int parity) {
+	public void setDay (Schedule a, byte i, int parity) {
 		adapter = a;
-		day = a.getDay(i);
+		day = a.response.schedule.get(i);
 
 		initChildren(parity);
 
@@ -49,22 +47,22 @@ public class DayView extends android.support.v7.widget.CardView {
 		((TextView) ll.findViewById(R.id.day_title)).setText(day.title);
 
 		LinearLayout ls;
-		CoupleTime t;
+		Schedule.Response.CoupleTime t;
 		int count = 0;
 
-		for (Couple c : day.couples) {
+		for (Schedule.Response.Day.Couple c : day.couples) {
 
 			if (c.parity != 0 && c.parity != parity)
 				continue;
 
 			ls = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.item_couple, null, true);
-			t = adapter.getCoupleTime(c.coupleId);
+			t = adapter.response.couples.get(c.coupleId-1);
 
 			((TextView) ls.findViewById(R.id.couple_number)).setText(String.format(getString(R.string.couple_number), c.coupleId));
 			((TextView) ls.findViewById(R.id.couple_subject)).setText(String.format(getString(R.string.couple_subject), c.type, c.subject));
 			((TextView) ls.findViewById(R.id.couple_time)).setText(t.start + "-" + t.end);
-			((TextView) ls.findViewById(R.id.couple_audience)).setText(c.build + "; ауд. " + c.getListAudience() + (c.teacher.isEmpty() ? "" : "; " + c.teacher));
-			((TextView) ls.findViewById(R.id.couple_groups)).setText(String.format(getString(R.string.couple_groups), c.getListGroups()));
+			((TextView) ls.findViewById(R.id.couple_audience)).setText(c.build + "; ауд. " + Utils.getStringFromArray(c.audiences) + (c.teacher.isEmpty() ? "" : "; " + c.teacher));
+			((TextView) ls.findViewById(R.id.couple_groups)).setText(String.format(getString(R.string.couple_groups), Utils.getStringFromArray(c.groups)));
 
 			ll.addView(ls);
 			count++;

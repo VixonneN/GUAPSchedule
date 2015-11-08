@@ -2,7 +2,7 @@ package ru.vlad805.guap.schedule.fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -14,18 +14,16 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.util.Calendar;
-import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import mjson.Json;
 import ru.vlad805.guap.schedule.R;
 import ru.vlad805.guap.schedule.activities.DrawerActivity;
-import ru.vlad805.guap.schedule.adapters.ScheduleAdapter;
-import ru.vlad805.guap.schedule.utils.API;
-import ru.vlad805.guap.schedule.utils.APICallback;
-import ru.vlad805.guap.schedule.utils.APIError;
+import ru.vlad805.guap.schedule.api.RestApiImpl;
+import ru.vlad805.guap.schedule.api.Schedule;
 import ru.vlad805.guap.schedule.utils.Utils;
 import ru.vlad805.guap.schedule.views.DayView;
 
@@ -38,7 +36,7 @@ public class ScheduleListFragment extends Fragment {
 	private Utils u;
 	private int isParityNow;
 	private ProgressDialog progress;
-	private ScheduleAdapter globalData;
+	private Schedule globalData;
 
 	public ScheduleListFragment() {
 		u = new Utils(getContext());
@@ -63,7 +61,7 @@ public class ScheduleListFragment extends Fragment {
 		super.onViewCreated(view, savedInstanceState);
 		String cache = u.getString(DrawerActivity.KEY_STORED);
 		if (cache != null && !cache.isEmpty() && isAdded()) {
-			ScheduleAdapter data = new ScheduleAdapter(Json.read(cache));
+			Schedule data = new Gson().fromJson(cache, Schedule.class);
 			init(data);
 			show(data);
 		}
@@ -72,40 +70,40 @@ public class ScheduleListFragment extends Fragment {
 
 	}
 
-	public void loadAll (String groupId) {
-
-		HashMap<String, String> params = new HashMap<>();
-		params.put("groupId", groupId);
-
+	public void loadAll (final String groupId) {
 		progress = u.showProgress(getString(R.string.alert_updating));
 
-		API.invoke(getContext(), "guap.parseSchedule", params, new APICallback() {
+		AsyncTask<Void, Void, Schedule> asyncTask = new AsyncTask<Void, Void, Schedule>() {
 			@Override
-			public void onResult(Json result) {
-				progress.cancel();
-				ScheduleAdapter data = new ScheduleAdapter(result);
-				u.setString(DrawerActivity.KEY_STORED, result.toString());
-				if (isAdded()) {
-					init(data);
-					show(data);
+			protected Schedule doInBackground(Void... params) {
+				try {
+					return RestApiImpl.INSTANCE.getApi().parseSchedule(groupId).execute().body();
+				} catch (Exception e) {
+					return null;
 				}
 			}
-
 			@Override
-			public void onError(APIError e) {
-				progress.cancel();
-				if (u.hasString(DrawerActivity.KEY_STORED)) {
-					u.toast(getString(R.string.alert_nointernet));
+			protected void onPostExecute(Schedule schedule) {
+				if (schedule != null) {
+					u.setString(DrawerActivity.KEY_STORED, new Gson().toJson(schedule));
+					if (isAdded()) {
+						init(schedule);
+						show(schedule);
+					}
 				} else {
-					u.toast(getString(R.string.alert_nointernet_nothing2show));
+					if (u.hasString(DrawerActivity.KEY_STORED)) {
+						u.toast(getString(R.string.alert_nointernet));
+					} else {
+						u.toast(getString(R.string.alert_nointernet_nothing2show));
+					}
 				}
-
+				progress.cancel();
 			}
-		});
+		}.execute();
 	}
 
-	public void init (ScheduleAdapter data) {
-		mContentUpdated.setText(String.format(getString(R.string.schedule_from), data.updated));
+	public void init (Schedule data) {
+		mContentUpdated.setText(String.format(getString(R.string.schedule_from), data.response.parseDate));
 
 		mContentSettings.setContentPadding(DayView.PADDING_LR, DayView.PADDING_TB, DayView.PADDING_LR, DayView.PADDING_TB);
 
@@ -129,7 +127,7 @@ public class ScheduleListFragment extends Fragment {
 		});
 	}
 
-	public void show (ScheduleAdapter data) {
+	public void show (Schedule data) {
 
 		globalData = data;
 
@@ -138,7 +136,7 @@ public class ScheduleListFragment extends Fragment {
 		list.setOrientation(LinearLayout.VERTICAL);
 		DayView itemLayout;
 
-		int l = data.schedule.length;
+		int l = data.response.schedule.size();
 
 		for (byte j = 0; j < l; ++j) {
 			itemLayout = new DayView(act);
