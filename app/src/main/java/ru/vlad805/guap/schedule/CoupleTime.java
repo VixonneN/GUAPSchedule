@@ -8,8 +8,8 @@ public class CoupleTime {
 	public String end;
 
 	public CoupleTime (Json d) {
-		id = d.at(0).asByte();
-		start = d.at(1).asString();
-		end = d.at(2).asString();
+		id = d.at("coupleId").asByte();
+		start = d.at("start").asString();
+		end = d.at("end").asString();
 	}
 }
