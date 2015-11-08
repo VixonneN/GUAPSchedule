@@ -58,8 +58,6 @@ public class ScheduleListFragment extends Fragment {
 		return root;
 	}
 
-
-	//TODO здесь все еще куча проблем, но так лучше
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);

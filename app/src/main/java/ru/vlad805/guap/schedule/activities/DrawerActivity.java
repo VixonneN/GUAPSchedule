@@ -54,7 +54,9 @@ public class DrawerActivity
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
-		selectMenuItem(MainMenuItem.defaultItem());
+		if (savedInstanceState == null){
+			selectMenuItem(MainMenuItem.defaultItem());
+		}
 	}
 
 	@Override
