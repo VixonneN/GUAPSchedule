@@ -17,15 +17,15 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 import mjson.Json;
+import ru.vlad805.guap.schedule.Day;
+import ru.vlad805.guap.schedule.R;
+import ru.vlad805.guap.schedule.activities.DrawerActivity;
+import ru.vlad805.guap.schedule.adapters.ScheduleAdapter;
 import ru.vlad805.guap.schedule.utils.API;
 import ru.vlad805.guap.schedule.utils.APICallback;
 import ru.vlad805.guap.schedule.utils.APIError;
-import ru.vlad805.guap.schedule.Day;
-import ru.vlad805.guap.schedule.views.DayView;
-import ru.vlad805.guap.schedule.R;
-import ru.vlad805.guap.schedule.adapters.ScheduleAdapter;
 import ru.vlad805.guap.schedule.utils.Utils;
-import ru.vlad805.guap.schedule.activities.MainActivity;
+import ru.vlad805.guap.schedule.views.DayView;
 
 public class ScheduleListFragment extends Fragment {
 
@@ -60,13 +60,13 @@ public class ScheduleListFragment extends Fragment {
 	public void onStart () {
 		super.onStart();
 		if (!loaded) {
-			String cache = u.getString(MainActivity.KEY_STORED);
+			String cache = u.getString(DrawerActivity.KEY_STORED);
 			if (cache != null && !cache.isEmpty()) {
 				ScheduleAdapter data = new ScheduleAdapter(Json.read(cache));
 				init(data);
 				show(data);
 			}
-			String groupId = u.getString(MainActivity.KEY_GID);
+			String groupId = u.getString(DrawerActivity.KEY_GID);
 			loadAll(groupId);
 		}
 	}
@@ -95,7 +95,7 @@ public class ScheduleListFragment extends Fragment {
 			public void onResult(Json result) {
 				progress.cancel();
 				ScheduleAdapter data = new ScheduleAdapter(result);
-				u.setString(MainActivity.KEY_STORED, result.toString());
+				u.setString(DrawerActivity.KEY_STORED, result.toString());
 				init(data);
 				show(data);
 			}
@@ -103,7 +103,7 @@ public class ScheduleListFragment extends Fragment {
 			@Override
 			public void onError(APIError e) {
 				progress.cancel();
-				if (u.hasString(MainActivity.KEY_STORED)) {
+				if (u.hasString(DrawerActivity.KEY_STORED)) {
 					u.toast(getString(R.string.alert_nointernet));
 				} else {
 					u.toast(getString(R.string.alert_nointernet_nothing2show));
