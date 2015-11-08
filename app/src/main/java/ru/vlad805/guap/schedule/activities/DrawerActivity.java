@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import ru.vlad805.guap.schedule.R;
@@ -12,7 +13,7 @@ import ru.vlad805.guap.schedule.fragments.ScheduleListFragment;
 import ru.vlad805.guap.schedule.utils.Utils;
 
 public class DrawerActivity
-		extends AppCompatActivity
+		extends BaseActivity
 		implements  NavigationView.OnNavigationItemSelectedListener {
 
 	final public static String KEY_GID = "gid";
@@ -23,10 +24,13 @@ public class DrawerActivity
 	private Utils u;
 
 	@Override
+	protected int getContentView() {
+		return R.layout.activity_main;
+	}
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-
-
+		super.onCreate(savedInstanceState);
 		u = new Utils(this);
 
 		if (!u.hasString(KEY_GID)) {
@@ -35,7 +39,9 @@ public class DrawerActivity
 			return;
 		}
 
-		setContentView(R.layout.activity_main);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_hamburger);
+
 		mNavigation = (NavigationView)findViewById(R.id.navigation);
 		mNavigation.setCheckedItem(0);
 		mNavigation.setNavigationItemSelectedListener(this);
