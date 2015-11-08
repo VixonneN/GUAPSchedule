@@ -13,11 +13,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import ru.vlad805.guap.schedule.MainMenuItem;
 import ru.vlad805.guap.schedule.R;
+import ru.vlad805.guap.schedule.fragments.SelectGroupFragment;
 import ru.vlad805.guap.schedule.utils.Utils;
 
 public class DrawerActivity
 		extends BaseActivity
-		implements  NavigationView.OnNavigationItemSelectedListener {
+		implements NavigationView.OnNavigationItemSelectedListener, SelectGroupFragment.GroupSelectedListener {
 
 	final public static String KEY_GID = "gid";
 	final public static String KEY_STORED = "stored";
@@ -109,5 +110,10 @@ public class DrawerActivity
 		} else {
 			mDrawerLayout.openDrawer(GravityCompat.START);
 		}
+	}
+
+	@Override
+	public void onGroupSelected() {
+		selectMenuItem(MainMenuItem.SCHEDULE);
 	}
 }
