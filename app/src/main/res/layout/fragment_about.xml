@@ -3,8 +3,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:background="#1F3D7A"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	tools:context="ru.vlad805.guap.schedule.activities.AboutActivity">
+	android:layout_height="match_parent">
 	<LinearLayout
 		android:orientation="vertical"
 		android:layout_width="match_parent"

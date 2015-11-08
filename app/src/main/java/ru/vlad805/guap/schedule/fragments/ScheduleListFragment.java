@@ -34,13 +34,6 @@ public class ScheduleListFragment extends Fragment {
 	private boolean loaded = false;
 	private ScheduleAdapter globalData;
 
-	public static ScheduleListFragment newInstance () {
-		ScheduleListFragment fragment = new ScheduleListFragment();
-		Bundle args = new Bundle();
-		fragment.setArguments(args);
-		return fragment;
-	}
-
 	public ScheduleListFragment() {
 		u = new Utils(getContext());
 	}
@@ -56,16 +49,18 @@ public class ScheduleListFragment extends Fragment {
 		return inflater.inflate(R.layout.fragment_content, container, false);
 	}
 
+	//TODO тут жопа какая-то
+	//Так делать неправильно. Обновление - в сервисе
 	@Override
 	public void onStart () {
 		super.onStart();
-		if (!loaded) {
 			String cache = u.getString(DrawerActivity.KEY_STORED);
 			if (cache != null && !cache.isEmpty()) {
 				ScheduleAdapter data = new ScheduleAdapter(Json.read(cache));
 				init(data);
 				show(data);
 			}
+		if (!loaded) {
 			String groupId = u.getString(DrawerActivity.KEY_GID);
 			loadAll(groupId);
 		}
