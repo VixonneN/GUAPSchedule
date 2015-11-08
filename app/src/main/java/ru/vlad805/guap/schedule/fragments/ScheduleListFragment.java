@@ -2,6 +2,7 @@ package ru.vlad805.guap.schedule.fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import mjson.Json;
 import ru.vlad805.guap.schedule.R;
 import ru.vlad805.guap.schedule.activities.DrawerActivity;
@@ -28,10 +31,13 @@ import ru.vlad805.guap.schedule.views.DayView;
 
 public class ScheduleListFragment extends Fragment {
 
+	@Bind(R.id.content_updated) TextView mContentUpdated;
+	@Bind(R.id.content_settings) CardView mContentSettings;
+
+	private View root;
 	private Utils u;
 	private int isParityNow;
 	private ProgressDialog progress;
-	private boolean loaded = false;
 	private ScheduleAdapter globalData;
 
 	public ScheduleListFragment() {
@@ -46,34 +52,26 @@ public class ScheduleListFragment extends Fragment {
 
 	@Override
 	public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_content, container, false);
+		View root = inflater.inflate(R.layout.fragment_content, container, false);
+		this.root = root;
+		ButterKnife.bind(this, root);
+		return root;
 	}
 
-	//TODO тут жопа какая-то
-	//Так делать неправильно. Обновление - в сервисе
+
+	//TODO здесь все еще куча проблем, но так лучше
 	@Override
-	public void onStart () {
-		super.onStart();
-			String cache = u.getString(DrawerActivity.KEY_STORED);
-			if (cache != null && !cache.isEmpty()) {
-				ScheduleAdapter data = new ScheduleAdapter(Json.read(cache));
-				init(data);
-				show(data);
-			}
-		if (!loaded) {
-			String groupId = u.getString(DrawerActivity.KEY_GID);
-			loadAll(groupId);
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		String cache = u.getString(DrawerActivity.KEY_STORED);
+		if (cache != null && !cache.isEmpty() && isAdded()) {
+			ScheduleAdapter data = new ScheduleAdapter(Json.read(cache));
+			init(data);
+			show(data);
 		}
-	}
+		String groupId = u.getString(DrawerActivity.KEY_GID);
+		loadAll(groupId);
 
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-	}
-
-	@Override
-	public void onDetach() {
-		super.onDetach();
 	}
 
 	public void loadAll (String groupId) {
@@ -82,7 +80,6 @@ public class ScheduleListFragment extends Fragment {
 		params.put("groupId", groupId);
 
 		progress = u.showProgress(getString(R.string.alert_updating));
-		loaded = true;
 
 		API.invoke(getContext(), "guap.parseSchedule", params, new APICallback() {
 			@Override
@@ -90,8 +87,10 @@ public class ScheduleListFragment extends Fragment {
 				progress.cancel();
 				ScheduleAdapter data = new ScheduleAdapter(result);
 				u.setString(DrawerActivity.KEY_STORED, result.toString());
-				init(data);
-				show(data);
+				if (isAdded()) {
+					init(data);
+					show(data);
+				}
 			}
 
 			@Override
@@ -108,16 +107,14 @@ public class ScheduleListFragment extends Fragment {
 	}
 
 	public void init (ScheduleAdapter data) {
-		((TextView) getActivity().findViewById(R.id.content_updated)).setText(String.format(getString(R.string.schedule_from), data.updated));
+		mContentUpdated.setText(String.format(getString(R.string.schedule_from), data.updated));
 
-		CardView s = ((CardView) getActivity().findViewById(R.id.content_settings));
-
-		s.setContentPadding(DayView.PADDING_LR, DayView.PADDING_TB, DayView.PADDING_LR, DayView.PADDING_TB);
+		mContentSettings.setContentPadding(DayView.PADDING_LR, DayView.PADDING_TB, DayView.PADDING_LR, DayView.PADDING_TB);
 
 		LinearLayout.LayoutParams lp = DayView.getDefaultLayoutParams(DayView.MATCH_PARENT, DayView.WRAP_CONTENT);
 		lp.setMargins(DayView.MARGIN_LR, DayView.MARGIN_TB, DayView.MARGIN_LR, DayView.MARGIN_TB);
-		s.setLayoutParams(lp);
-		s.setVisibility(View.VISIBLE);
+		mContentSettings.setLayoutParams(lp);
+		mContentSettings.setVisibility(View.VISIBLE);
 
 		isParityNow = (Calendar.getInstance().get(Calendar.WEEK_OF_YEAR) % 2) + 1;
 
