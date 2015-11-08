@@ -1,21 +1,19 @@
 package ru.vlad805.guap.schedule.activities;
 
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import ru.vlad805.guap.schedule.R;
+import ru.vlad805.guap.schedule.fragments.AboutFragment;
 
 public class AboutActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_about);
+		setContentView(R.layout.container);
 
 		ActionBar ab = getSupportActionBar();
 
@@ -25,16 +23,11 @@ public class AboutActivity extends AppCompatActivity {
 			ab.setHomeButtonEnabled(true);
 		}
 
-		String version = "1.0";
-
-		try {
-			PackageInfo data = getPackageManager().getPackageInfo(getApplicationInfo().packageName, PackageManager.GET_CONFIGURATIONS);
-			version = data.versionName;
-		} catch (PackageManager.NameNotFoundException e) {
-			e.printStackTrace();
+		if (savedInstanceState == null) {
+			getSupportFragmentManager().beginTransaction()
+					.add(R.id.container, new AboutFragment())
+					.commit();
 		}
-
-		((TextView) findViewById(R.id.about_version)).setText("v" + version);
 	}
 
 	public boolean onOptionsItemSelected (MenuItem item) {
