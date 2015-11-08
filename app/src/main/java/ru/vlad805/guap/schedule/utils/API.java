@@ -1,4 +1,4 @@
-package ru.vlad805.guap.schedule;
+package ru.vlad805.guap.schedule.utils;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -83,7 +83,7 @@ public class API {
 		}
 	}
 
-	static void invoke (Context context, String method, HashMap<String, String> params, APICallback callback) {
+	public static void invoke (Context context, String method, HashMap<String, String> params, APICallback callback) {
 		try {
 			new API(context, method, params, callback).send();
 		} catch (NotAvailableInternetException e) {

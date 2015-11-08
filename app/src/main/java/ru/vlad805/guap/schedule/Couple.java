@@ -3,6 +3,7 @@ package ru.vlad805.guap.schedule;
 import java.util.List;
 
 import mjson.Json;
+import ru.vlad805.guap.schedule.utils.Utils;
 
 public class Couple {
 	public byte coupleId;

@@ -1,4 +1,4 @@
-package ru.vlad805.guap.schedule;
+package ru.vlad805.guap.schedule.utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -38,7 +38,7 @@ public class Utils {
 		return this;
 	}
 
-	static String getStringFromArray (String[] s) {
+	public static String getStringFromArray (String[] s) {
 		StringBuilder sb = new StringBuilder();
 		int i = s.length;
 		for (String a : s) {

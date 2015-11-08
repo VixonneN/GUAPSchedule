@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ru.vlad805.guap.schedule.ScheduleListFragment">
+    tools:context="ru.vlad805.guap.schedule.fragments.ScheduleListFragment">
 	<LinearLayout
 		android:orientation="vertical"
 		android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package ru.vlad805.guap.schedule;
+package ru.vlad805.guap.schedule.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

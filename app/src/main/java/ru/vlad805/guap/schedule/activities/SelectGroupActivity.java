@@ -1,4 +1,4 @@
-package ru.vlad805.guap.schedule;
+package ru.vlad805.guap.schedule.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,6 +13,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import mjson.Json;
+import ru.vlad805.guap.schedule.utils.API;
+import ru.vlad805.guap.schedule.utils.APICallback;
+import ru.vlad805.guap.schedule.utils.APIError;
+import ru.vlad805.guap.schedule.R;
+import ru.vlad805.guap.schedule.utils.Utils;
 
 public class SelectGroupActivity extends AppCompatActivity implements View.OnClickListener {
 
