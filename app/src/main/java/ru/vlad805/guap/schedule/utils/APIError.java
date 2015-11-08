@@ -1,6 +1,7 @@
-package ru.vlad805.guap.schedule;
+package ru.vlad805.guap.schedule.utils;
 
 import mjson.Json;
+import ru.vlad805.guap.schedule.utils.API;
 
 public class APIError {
 	private int errorId;

@@ -1,4 +1,4 @@
-package ru.vlad805.guap.schedule;
+package ru.vlad805.guap.schedule.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import ru.vlad805.guap.schedule.fragments.NavigationDrawerFragment;
+import ru.vlad805.guap.schedule.R;
+import ru.vlad805.guap.schedule.fragments.ScheduleListFragment;
+import ru.vlad805.guap.schedule.utils.Utils;
 
 public class MainActivity
 		extends AppCompatActivity

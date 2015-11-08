@@ -1,4 +1,4 @@
-package ru.vlad805.guap.schedule;
+package ru.vlad805.guap.schedule.views;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -7,6 +7,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import ru.vlad805.guap.schedule.Couple;
+import ru.vlad805.guap.schedule.CoupleTime;
+import ru.vlad805.guap.schedule.Day;
+import ru.vlad805.guap.schedule.R;
+import ru.vlad805.guap.schedule.adapters.ScheduleAdapter;
 
 public class DayLayout extends android.support.v7.widget.CardView {
 
@@ -80,7 +86,7 @@ public class DayLayout extends android.support.v7.widget.CardView {
 	final public static int WRAP_CONTENT = LinearLayout.LayoutParams.WRAP_CONTENT;
 	final public static int MATCH_PARENT = LinearLayout.LayoutParams.MATCH_PARENT;
 
-	static LinearLayout.LayoutParams getDefaultLayoutParams (int width, int height) {
+	public static LinearLayout.LayoutParams getDefaultLayoutParams (int width, int height) {
 		return new LinearLayout.LayoutParams(width, height);
 	}
 

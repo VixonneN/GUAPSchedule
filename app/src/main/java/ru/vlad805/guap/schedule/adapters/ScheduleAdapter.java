@@ -1,9 +1,11 @@
-package ru.vlad805.guap.schedule;
+package ru.vlad805.guap.schedule.adapters;
 
 import java.util.HashMap;
 import java.util.List;
 
 import mjson.Json;
+import ru.vlad805.guap.schedule.CoupleTime;
+import ru.vlad805.guap.schedule.Day;
 
 public class ScheduleAdapter {
 

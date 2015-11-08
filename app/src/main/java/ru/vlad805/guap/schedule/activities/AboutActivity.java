@@ -1,4 +1,4 @@
-package ru.vlad805.guap.schedule;
+package ru.vlad805.guap.schedule.activities;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -7,6 +7,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import ru.vlad805.guap.schedule.R;
 
 public class AboutActivity extends AppCompatActivity {
 
