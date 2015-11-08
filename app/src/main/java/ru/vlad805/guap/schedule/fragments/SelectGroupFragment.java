@@ -91,7 +91,6 @@ public class SelectGroupFragment extends Fragment implements View.OnClickListene
                 }
                 String group = spinner.getSelectedItem().toString();
                 u.setString(DrawerActivity.KEY_GID, group);
-                startActivity(new Intent(getContext(), DrawerActivity.class));
                 if (getActivity() instanceof GroupSelectedListener) {
                     ((GroupSelectedListener) getActivity()).onGroupSelected();
                 } else {

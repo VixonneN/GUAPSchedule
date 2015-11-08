@@ -1,5 +1,6 @@
 package ru.vlad805.guap.schedule.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import ru.vlad805.guap.schedule.R;
@@ -24,6 +25,7 @@ public class WelcomeActivity extends BaseActivity implements SelectGroupFragment
 
 	@Override
 	public void onGroupSelected() {
+		startActivity(new Intent(this, DrawerActivity.class));
 		finish();
 	}
 }
