@@ -1,0 +1,8 @@
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat">
+    </style>
+
+    <style name="AppTheme.CardView">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+</resources>

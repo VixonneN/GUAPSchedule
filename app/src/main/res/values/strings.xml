@@ -1,0 +1,31 @@
+<resources>
+	<string name="app_name">ГУАП Расписание</string>
+	<string name="app_copyrights">Владислав Велюга &#169; 2015</string>
+
+	<string name="drawer_title_schedule_all">Полное расписание</string>
+	<string name="drawer_title_schedule_tomorrow">Расписание на завтра</string>
+	<string name="drawer_title_settings">Выбрать группу</string>
+	<string name="drawer_title_about">О приложении</string>
+
+	<string name="title_activity_select_group">Выбор группы</string>
+	<string name="navigation_drawer_open">Open</string>
+	<string name="navigation_drawer_close">Close</string>
+
+	<string name="schedule_from">Расписание от %1$s</string>
+
+	<string name="couple_number">%1$d пара</string>
+	<string name="couple_subject">(%1$s) %2$s</string>
+	<string name="couple_groups">Группы: %1$s</string>
+	<string name="couple_nothing">Пар нет</string>
+
+	<string name="alert_nointernet">Нет подключения к интернету. Будет показано последнее успешно загруженное расписание ¯\\_(ツ)_/¯</string>
+	<string name="alert_nointernet_nothing2show">Нет подключения к интернету. Приложение было запущено в первый раз, поэтому ничего показать не могу ¯\\_(ツ)_/¯</string>
+	<string name="alert_nointernet_nogroups">Ошибка в процессе получения списка групп ¯\\_(ツ)_/¯</string>
+	<string name="alert_updating">Обновление расписания…</string>
+	<string name="alert_loading_groups">Загрузка списка групп…</string>
+	<string name="alert_incorrect_group">Группа не выбрана!</string>
+
+	<string name="select_submit">Сохранить</string>
+	<string name="title_activity_about">О приложении</string>
+
+</resources>

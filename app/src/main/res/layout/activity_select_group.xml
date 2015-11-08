@@ -1,0 +1,47 @@
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:background="#1F3D7A"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_above="@+id/relativeLayout"
+			android:layout_alignParentTop="true">
+			<ImageView
+				android:src="@drawable/guap_logo"
+				android:layout_width="wrap_content"
+				android:layout_height="90dp"
+				android:layout_centerVertical="true" />
+		</RelativeLayout>
+
+		<RelativeLayout
+			android:layout_alignParentBottom="true"
+			android:layout_width="match_parent"
+			android:layout_height="60dp"
+			android:id="@+id/relativeLayout">
+			<Spinner
+				android:id="@+id/select_spinner_group"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_alignParentStart="true"
+				android:layout_toStartOf="@+id/select_submit"
+				android:spinnerMode="dialog"/>
+			<Button
+				style="@style/Widget.AppCompat.Button.Borderless"
+				android:id="@+id/select_submit"
+				android:layout_alignParentEnd="true"
+				android:text="@string/select_submit"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent" />
+		</RelativeLayout>
+	</RelativeLayout>
+</LinearLayout>
+
