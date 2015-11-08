@@ -13,10 +13,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import mjson.Json;
+import ru.vlad805.guap.schedule.R;
 import ru.vlad805.guap.schedule.utils.API;
 import ru.vlad805.guap.schedule.utils.APICallback;
 import ru.vlad805.guap.schedule.utils.APIError;
-import ru.vlad805.guap.schedule.R;
 import ru.vlad805.guap.schedule.utils.Utils;
 
 public class SelectGroupActivity extends AppCompatActivity implements View.OnClickListener {
@@ -70,8 +70,8 @@ public class SelectGroupActivity extends AppCompatActivity implements View.OnCli
 					return;
 				}
 				String group = spinner.getSelectedItem().toString();
-				u.setString(MainActivity.KEY_GID, group);
-				startActivity(new Intent(this, MainActivity.class));
+				u.setString(DrawerActivity.KEY_GID, group);
+				startActivity(new Intent(this, DrawerActivity.class));
 				finish();
 		}
 	}
