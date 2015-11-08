@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class Utils {
 
 	private Context context;
@@ -38,6 +40,15 @@ public class Utils {
 	public static String getStringFromArray (String[] s) {
 		StringBuilder sb = new StringBuilder();
 		int i = s.length;
+		for (String a : s) {
+			sb.append(a).append(--i > 0 ? ", " : "");
+		}
+		return sb.toString();
+	}
+
+	public static String getStringFromArray (List<String> s) {
+		StringBuilder sb = new StringBuilder();
+		int i = s.size();
 		for (String a : s) {
 			sb.append(a).append(--i > 0 ? ", " : "");
 		}
