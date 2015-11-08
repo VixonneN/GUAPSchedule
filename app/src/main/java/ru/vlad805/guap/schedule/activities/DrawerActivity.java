@@ -2,6 +2,7 @@ package ru.vlad805.guap.schedule.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -21,12 +22,14 @@ public class DrawerActivity
 	final public static String KEY_GID = "gid";
 	final public static String KEY_STORED = "stored";
 
+	private static final String STATE_MENU_ITEM = "menuitem";
 	private static final String CONTAINER_TAG = "currentFragment";
 
 	@Bind(R.id.drawer_layout)	DrawerLayout mDrawerLayout;
 	@Bind(R.id.navigation) 		NavigationView mNavigation;
 
 	private Utils u;
+	private MainMenuItem mCurrentMenuItem = MainMenuItem.defaultItem();
 
 	@Override
 	protected int getContentView() {
@@ -54,9 +57,14 @@ public class DrawerActivity
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
-		if (savedInstanceState == null){
-			selectMenuItem(MainMenuItem.defaultItem());
-		}
+		selectMenuItem(savedInstanceState == null
+				? mCurrentMenuItem
+				: (MainMenuItem) savedInstanceState.getSerializable(STATE_MENU_ITEM));
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		outState.putSerializable(STATE_MENU_ITEM, mCurrentMenuItem);
 	}
 
 	@Override
