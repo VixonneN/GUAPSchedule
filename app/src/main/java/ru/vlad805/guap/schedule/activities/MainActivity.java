@@ -5,12 +5,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import ru.vlad805.guap.schedule.fragments.NavigationDrawerFragment;
 import ru.vlad805.guap.schedule.R;
+import ru.vlad805.guap.schedule.fragments.NavigationDrawerFragment;
 import ru.vlad805.guap.schedule.fragments.ScheduleListFragment;
 import ru.vlad805.guap.schedule.utils.Utils;
 
@@ -22,7 +21,7 @@ public class MainActivity
 	final public static String KEY_STORED = "stored";
 
 	private NavigationDrawerFragment mNavigationDrawerFragment;
-	private CharSequence mTitle;
+
 	private Utils u;
 
 	@Override
@@ -41,7 +40,7 @@ public class MainActivity
 		setContentView(R.layout.activity_main);
 
 	    mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-	    mTitle = getTitle();
+
 
 	    mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
 
@@ -73,13 +72,6 @@ public class MainActivity
 		transaction.commit();
 	}
 
-	public void restoreActionBar() {
-	    ActionBar actionBar = getSupportActionBar();
-	    if (actionBar == null)
-	        return;
-	    actionBar.setDisplayShowTitleEnabled(true);
-	    actionBar.setTitle(mTitle);
-	}
 
 
 	@Override
