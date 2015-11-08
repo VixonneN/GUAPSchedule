@@ -152,7 +152,7 @@ public class ScheduleListFragment extends Fragment {
 
 		for (byte j = 0; j < l; ++j) {
 			itemLayout = new DayView(act);
-			itemLayout.setDay(data, j++, isParityNow);
+			itemLayout.setDay(data, j, isParityNow);
 
 			list.addView(itemLayout);
 		}
