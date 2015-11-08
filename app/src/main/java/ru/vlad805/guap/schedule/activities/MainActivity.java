@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 
 import ru.vlad805.guap.schedule.R;
 import ru.vlad805.guap.schedule.fragments.NavigationDrawerFragment;
@@ -40,11 +39,7 @@ public class MainActivity
 		setContentView(R.layout.activity_main);
 
 	    mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-
-
 	    mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
-
-
 	}
 
 	@Override
@@ -68,23 +63,12 @@ public class MainActivity
 				startActivity(new Intent(this, AboutActivity.class));
 			    return;
 	    }
-
 		transaction.commit();
 	}
 
-
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    int id = item.getItemId();
-		return super.onOptionsItemSelected(item);
-	}
-
-
 	@Override
 	public void onBackPressed(){
-		if(mNavigationDrawerFragment.isDrawerOpen()){
-		} else {
+		if(!mNavigationDrawerFragment.isDrawerOpen()){
 			super.onBackPressed();
 		}
 	}

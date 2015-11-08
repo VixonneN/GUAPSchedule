@@ -14,14 +14,14 @@ import ru.vlad805.guap.schedule.Day;
 import ru.vlad805.guap.schedule.R;
 import ru.vlad805.guap.schedule.adapters.ScheduleAdapter;
 
-public class DayLayout extends android.support.v7.widget.CardView {
+public class DayView extends android.support.v7.widget.CardView {
 
 	private Context context;
 	private ScheduleAdapter adapter;
 	private Day day;
 
 
-	public DayLayout(Context ctx) {
+	public DayView(Context ctx) {
 		super(ctx);
 
 		context = ctx;
