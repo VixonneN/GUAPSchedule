@@ -24,7 +24,6 @@ import ru.vlad805.guap.schedule.R;
 
 public class NavigationDrawerFragment extends Fragment {
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
-    private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
 	private NavigationDrawerCallbacks mCallbacks;
 
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -93,21 +92,17 @@ public class NavigationDrawerFragment extends Fragment {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
-
 	    mDrawerToggle = new ActionBarDrawerToggle(getActivity(), mDrawerLayout, R.drawable.ic_drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             @Override
             public void onDrawerClosed(View drawerView) {
-                actionBar.setDisplayShowHomeEnabled(false);
                 super.onDrawerClosed(drawerView);
+                actionBar.setDisplayShowHomeEnabled(false);
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
 	            actionBar.setDisplayShowHomeEnabled(true);
-                if (!isAdded()) {
-                    return;
-                }
             }
         };
 
@@ -172,13 +167,6 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
-    }
-
-    private void showGlobalContextActionBar() {
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayShowTitleEnabled(true);
-
-        actionBar.setTitle(R.string.app_name);
     }
 
     private ActionBar getActionBar() {

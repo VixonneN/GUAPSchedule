@@ -33,6 +33,7 @@ public class AboutActivity extends AppCompatActivity {
 		} catch (PackageManager.NameNotFoundException e) {
 			e.printStackTrace();
 		}
+
 		((TextView) findViewById(R.id.about_version)).setText("v" + version);
 	}
 

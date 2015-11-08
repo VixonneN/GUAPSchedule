@@ -19,9 +19,4 @@ public class Day {
 			couples[i++] = new Couple(item);
 		}
 	}
-
-	public Couple getCouple (byte i) {
-		return i >= 0 && i < couples.length ? couples[i] : null;
-	}
-
 }

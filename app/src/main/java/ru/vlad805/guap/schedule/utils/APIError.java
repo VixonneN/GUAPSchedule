@@ -1,7 +1,6 @@
 package ru.vlad805.guap.schedule.utils;
 
 import mjson.Json;
-import ru.vlad805.guap.schedule.utils.API;
 
 public class APIError {
 	private int errorId;
@@ -15,13 +14,5 @@ public class APIError {
 	}
 	public String getString () {
 		return "Error API: " + errorId + ": " + errorInfo;
-	}
-
-	public int getErrorId() {
-		return errorId;
-	}
-
-	public String getErrorInfo() {
-		return errorInfo;
 	}
 }

@@ -27,7 +27,6 @@ public class MainActivity
 	protected void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 
-
 		u = new Utils(this);
 
 		if (!u.hasString(KEY_GID)) {
@@ -49,7 +48,7 @@ public class MainActivity
 
 	    switch (position) {
 		    case 0:
-			    transaction.replace(R.id.container, ScheduleListFragment.newInstance(false));
+			    transaction.replace(R.id.container, ScheduleListFragment.newInstance());
 			    break;
 
 		    case 1:

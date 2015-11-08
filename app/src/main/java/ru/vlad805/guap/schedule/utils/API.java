@@ -10,17 +10,11 @@ import mjson.Json;
 
 public class API {
 	final public static String API_DOMAIN = "api.vlad805.ru";
-	final public static String V = "v";
-	final public static String USER_ACCESS_TOKEN = "userAccessToken";
-	final public static String USER_ID = "userId";
-	final public static String USER_IDS = "userIds";
 	final public static String RESPONSE = "response";
-	final public static String RESULT = "result";
 
 	private Context context;
 	private String method;
 	private HashMap<String, String> params;
-	private Json result;
 	private APICallback callback = null;
 
 	public API (Context ctx, String method, HashMap<String, String> params, APICallback callback) {
@@ -41,10 +35,6 @@ public class API {
 		new AsyncLoadData().execute("http://" + API_DOMAIN + "/" + method, p.toString());
 	}
 
-	public Json getResult () {
-		return result;
-	}
-
 	private class AsyncLoadData extends AsyncTask<String, Integer, String> {
 
 		@Override
@@ -61,10 +51,7 @@ public class API {
 		}
 
 		@Override
-		protected void onProgressUpdate(Integer... progress) {
-//			if (progress[0] == -1)
-
-		}
+		protected void onProgressUpdate(Integer... progress) { }
 
 		@Override
 		protected void onPostExecute (String r) {
@@ -72,7 +59,7 @@ public class API {
 				callback.onError(null);
 				return;
 			}
-			result = Json.read(r);
+			Json result = Json.read(r);
 			result = result.at("response");
 			if (callback != null) {
 				if (result.isObject() && result.has("errorId"))
