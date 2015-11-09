@@ -9,18 +9,17 @@ import retrofit.Retrofit;
  * Created by arktic on 08.11.15.
  */
 public enum RestApiImpl {
-    INSTANCE;
+	INSTANCE;
 
-    Retrofit retrofit;
+	Retrofit retrofit;
 
-    RestApiImpl() {
-        retrofit = new Retrofit.Builder()
-                .baseUrl("http://api.vlad805.ru")
-                .addConverterFactory(GsonConverterFactory.create(new Gson()))
-                .build();
-    }
-
-    public RestApi getApi() {
-        return retrofit.create(RestApi.class);
-    }
+	RestApiImpl() {
+		retrofit = new Retrofit.Builder()
+				.baseUrl("http://api.vlad805.ru")
+				.addConverterFactory(GsonConverterFactory.create(new Gson()))
+				.build();
+	}
+	public RestApi getApi() {
+		return retrofit.create(RestApi.class);
+	}
 }

@@ -102,7 +102,7 @@ public class ScheduleListFragment extends Fragment {
 		}.execute();
 	}
 
-	//нахуй так жить TODO: ListView
+	// нахуй так жить TODO: ListView
 	public void init (Schedule data) {
 		mContentUpdated.setText(String.format(getString(R.string.schedule_from), data.response.parseDate));
 
@@ -128,7 +128,7 @@ public class ScheduleListFragment extends Fragment {
 		});
 	}
 
-	//нахуй так жить TODO: ListView
+	// нахуй так жить TODO: ListView
 	public void show (Schedule data) {
 
 		globalData = data;

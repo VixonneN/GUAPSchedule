@@ -7,10 +7,10 @@ android {
 
     defaultConfig {
         applicationId "ru.vlad805.guap.schedule"
-        minSdkVersion 17
+        minSdkVersion 9
         targetSdkVersion 23
         versionCode 1
-        versionName "1.1 (beta)"
+        versionName "1.1 (RC1)"
     }
     buildTypes {
         release {
