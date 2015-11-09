@@ -18,9 +18,9 @@
 	<string name="couple_groups">Группы: %1$s</string>
 	<string name="couple_nothing">Пар нет</string>
 
-	<string name="alert_nointernet" formatted="false"><![CDATA[Нет подключения к интернету.<br><br>Будет показано последнее успешно загруженное расписание ¯\\_(ツ)_/¯]]></string>
-	<string name="alert_nointernet_nothing2show" formatted="false"><![CDATA[Нет подключения к интернету.<br><br>Приложение было запущено в первый раз, поэтому ничего показать не могу ¯\\_(ツ)_/¯]]></string>
-	<string name="alert_nointernet_nogroups" formatted="false"><![CDATA[Ошибка в процессе получения списка групп<br><br>¯\\_(ツ)_/¯]]></string>
+	<string name="alert_nointernet" formatted="false"><![CDATA[Нет подключения к интернету.\n\nБудет показано последнее успешно загруженное расписание ¯\\_(ツ)_/¯]]></string>
+	<string name="alert_nointernet_nothing2show" formatted="false"><![CDATA[Нет подключения к интернету.\n\nПриложение было запущено в первый раз, поэтому ничего показать не могу ¯\\_(ツ)_/¯]]></string>
+	<string name="alert_nointernet_nogroups" formatted="false"><![CDATA[Произошла ошибка в процессе получения списка групп\n\n¯\\_(ツ)_/¯]]></string>
 	<string name="alert_updating">Обновление расписания…</string>
 	<string name="alert_loading_groups">Загрузка списка групп…</string>
 	<string name="alert_incorrect_group">Группа не выбрана!</string>
@@ -28,7 +28,7 @@
 	<string name="select_submit">Сохранить</string>
 	<string name="title_activity_about">О приложении</string>
 
-	<string name="n"></string>
+	<string name="n">null</string>
 	<string name="about_webversion">Веб-версия</string>
 
 </resources>

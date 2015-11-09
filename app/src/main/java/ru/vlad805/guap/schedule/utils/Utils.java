@@ -9,6 +9,8 @@ import java.util.List;
 
 public class Utils {
 
+	final public static String API_VERSION = "2.01";
+
 	private Context context;
 
 	public Utils (Context ctx) {
