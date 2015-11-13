@@ -1,66 +1,57 @@
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-	<LinearLayout
-		android:orientation="vertical"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-		<android.support.v7.widget.CardView
-			android:visibility="gone"
-			android:orientation="vertical"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:id="@+id/content_settings"
-			android:layout_margin="5dp">
-			<LinearLayout
-				android:orientation="vertical"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content">
-				<TextView
-					android:id="@+id/content_updated"
-					android:textSize="20sp"
-					android:textColor="@android:color/black"
-					android:textAlignment="center"
-					android:gravity="center_horizontal"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content" />
-				<LinearLayout
-					android:orientation="horizontal"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="center_horizontal">
-					<TextView
-						android:text="Нечетная"
-						android:textColor="#ff0000"
-						android:layout_weight="1"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"/>
-					<Switch
-						android:layout_marginLeft="7dp"
-						android:layout_marginRight="7dp"
-						android:layout_weight="1"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:id="@+id/switcher_parity"/>
-					<TextView
-						android:text="Четная"
-						android:layout_weight="1"
-						android:textColor="#2222ff"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"/>
-				</LinearLayout>
+    <LinearLayout
+        android:id="@+id/content_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="5dp">
 
-			</LinearLayout>
-		</android.support.v7.widget.CardView>
+        <TextView
+            android:id="@+id/content_updated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"/>
 
-		<LinearLayout
-			android:orientation="vertical"
-			android:id="@+id/content_wrap"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
-	</LinearLayout>
-</ScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:text="Нечетная" />
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/switcher_parity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:text="Четная" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+</LinearLayout>
