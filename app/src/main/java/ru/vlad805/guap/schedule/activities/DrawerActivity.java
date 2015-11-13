@@ -22,6 +22,7 @@ public class DrawerActivity
 
 	final public static String KEY_GID = "gid";
 	final public static String KEY_STORED = "stored";
+	final public static String KEY_STORED_TIME = "storedtime";
 
 	private static final String STATE_MENU_ITEM = "menuitem";
 	private static final String CONTAINER_TAG = "currentFragment";

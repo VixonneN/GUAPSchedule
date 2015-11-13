@@ -8,6 +8,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -16,6 +19,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -45,6 +49,7 @@ public class ScheduleListFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
 		u = new Utils(getContext());
 	}
 
@@ -62,13 +67,30 @@ public class ScheduleListFragment extends Fragment {
 		if (cache != null && !cache.isEmpty() && isAdded()) {
 			Schedule data = new Gson().fromJson(cache, Schedule.class);
 			init(data);
+			if (new Date().getTime() - u.getSettings().getLong(DrawerActivity.KEY_STORED_TIME, 0L) > 60 * 60 * 1000) {
+				loadAll();
+			}
+		} else {
+			loadAll();
 		}
-		String groupId = u.getString(DrawerActivity.KEY_GID);
-		loadAll(groupId);
-
 	}
 
-	public void loadAll (final String groupId) {
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.refresh_menu, menu);
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.item_refresh) {
+			loadAll();
+		}
+		return true;
+	}
+
+	public void loadAll () {
+		String groupId = u.getString(DrawerActivity.KEY_GID);
 		progress = u.showProgress(getString(R.string.alert_updating));
 
 		AsyncTask<Void, Void, Schedule> asyncTask = new AsyncTask<Void, Void, Schedule>() {
@@ -84,6 +106,7 @@ public class ScheduleListFragment extends Fragment {
 			protected void onPostExecute(Schedule schedule) {
 				if (schedule != null) {
 					u.setString(DrawerActivity.KEY_STORED, new Gson().toJson(schedule));
+					u.getSettings().edit().putLong(DrawerActivity.KEY_STORED_TIME, new Date().getTime()).apply();
 					if (isAdded()) {
 						init(schedule);
 					}
