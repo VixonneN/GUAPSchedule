@@ -67,7 +67,7 @@ public class ScheduleListFragment extends Fragment {
 		if (cache != null && !cache.isEmpty() && isAdded()) {
 			Schedule data = new Gson().fromJson(cache, Schedule.class);
 			init(data);
-			if (new Date().getTime() - u.getSettings().getLong(DrawerActivity.KEY_STORED_TIME, 0L) > 60 * 60 * 1000) {
+			if (new Date().getTime() - u.getLong(DrawerActivity.KEY_STORED_TIME) > 60 * 60 * 1000) {
 				loadAll();
 			}
 		} else {
@@ -89,6 +89,9 @@ public class ScheduleListFragment extends Fragment {
 		return true;
 	}
 
+	/*
+	 * Request data by group from API
+	 */
 	public void loadAll () {
 		String groupId = u.getString(DrawerActivity.KEY_GID);
 		progress = u.showProgress(getString(R.string.alert_updating));
@@ -106,7 +109,7 @@ public class ScheduleListFragment extends Fragment {
 			protected void onPostExecute(Schedule schedule) {
 				if (schedule != null) {
 					u.setString(DrawerActivity.KEY_STORED, new Gson().toJson(schedule));
-					u.getSettings().edit().putLong(DrawerActivity.KEY_STORED_TIME, new Date().getTime()).apply();
+					u.setLong(DrawerActivity.KEY_STORED_TIME, new Date().getTime());
 					if (isAdded()) {
 						init(schedule);
 					}
@@ -122,18 +125,21 @@ public class ScheduleListFragment extends Fragment {
 		}.execute();
 	}
 
+	/*
+	 * Show schedule in fragment
+	 */
 	public void init (final Schedule data) {
-		mContentUpdated.setText(String.format(getString(R.string.schedule_from), data.response.parseDate));
-		mContentSettings.setVisibility(View.VISIBLE);
-
 		isParityNow = (Calendar.getInstance().get(Calendar.WEEK_OF_YEAR) % 2) + 1;
 
-		mSwitch.setChecked(isParityNow == 2);
+		mContentUpdated.setText(String.format(getString(R.string.schedule_from), data.response.editDate));
+		mContentSettings.setVisibility(View.VISIBLE);
 
+		mSwitch.setChecked(isParityNow == 2);
 		mSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
 			isParityNow = !isChecked ? 1 : 2;
 			mDayAdapter.setData(data.response, isParityNow);
 		});
+
 		mDayAdapter = new DayAdapter(getContext());
 
 		mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

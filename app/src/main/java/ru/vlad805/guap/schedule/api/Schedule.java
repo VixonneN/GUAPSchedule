@@ -33,8 +33,8 @@ public class Schedule {
 	        public String end;
 	    }
 
-	    public String parseDate;
-	    public long parseTime;
+	    public String editDate;
+	    public long editTime;
 	    public List<Day> schedule;
 	    public List<CoupleTime> couples;
 	}

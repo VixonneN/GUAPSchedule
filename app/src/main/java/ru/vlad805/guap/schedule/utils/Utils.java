@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Utils {
 
-	final public static String API_VERSION = "2.01";
+	final public static String API_VERSION = "2.02";
 
 	private Context context;
 
@@ -36,6 +36,15 @@ public class Utils {
 
 	public Utils removeString (String key) {
 		getSettings().edit().remove(key).apply();
+		return this;
+	}
+
+	public long getLong (String key) {
+		return getSettings().getLong(key, 0L);
+	}
+
+	public Utils setLong (String key, long value) {
+		getSettings().edit().putLong(key, value).apply();
 		return this;
 	}
 
@@ -69,7 +78,6 @@ public class Utils {
 
 	public ProgressDialog showProgress (String title, String text) {
 		ProgressDialog pd = new ProgressDialog(context);
-
 
 		if (title != null) {
 			pd.setTitle(title);
