@@ -76,6 +76,8 @@ public class DayView extends android.support.v7.widget.CardView {
 			ll.addView(ls);
 			count++;
 		}
+
+		// it not works, because if day is empty, it don't will receiving
 		if (count == 0) {
 			TextView msg = new TextView(getContext());
 			msg.setText(getContext().getString(R.string.couple_nothing));

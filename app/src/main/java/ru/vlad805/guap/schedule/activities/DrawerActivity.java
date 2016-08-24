@@ -50,7 +50,10 @@ public class DrawerActivity
 			return;
 		}
 
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		if (getSupportActionBar() != null) {
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		}
+		
 		getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_hamburger);
 
 		mNavigation.setNavigationItemSelectedListener(this);
