@@ -54,7 +54,7 @@ public class SelectGroupFragment extends Fragment {
 
         progress = u.showProgress(getString(R.string.alert_loading_groups));
 
-        AsyncTask<Void, Void, Groups> asyncTask = new AsyncTask<Void, Void, Groups>() {
+        new AsyncTask<Void, Void, Groups>() {
             @Override
             protected Groups doInBackground(Void... params) {
                 try {
@@ -81,7 +81,28 @@ public class SelectGroupFragment extends Fragment {
         List<String> items = Lists.transform(groups.response.items, group -> group.groupId);
         ArrayAdapter<?> adapter =  new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, items);
         spinner.setAdapter(adapter);
+
+	    int selected = getSelectionId(items);
+	    if (selected >= 0) {
+		    spinner.setSelection(selected);
+	    }
     }
+
+	private int getSelectionId(List<String> items) {
+		if (!u.hasString(DrawerActivity.KEY_GID)) {
+			return -1;
+		}
+
+		String current = u.getString(DrawerActivity.KEY_GID);
+
+		for (int i = 0, l = items.size(); i < l; ++i) {
+			if (items.get(i).equals(current)) {
+				return i;
+			}
+		}
+
+		return -1;
+	}
 
     @OnClick(R.id.select_submit)
     void onSubmit() {

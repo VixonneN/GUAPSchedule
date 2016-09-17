@@ -37,6 +37,7 @@ public class Schedule {
 	    public long editTime;
 	    public List<Day> schedule;
 	    public List<CoupleTime> couples;
+		public boolean correction;
 	}
 	public Response response;
 }

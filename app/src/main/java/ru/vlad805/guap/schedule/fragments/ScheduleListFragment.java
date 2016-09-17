@@ -92,7 +92,7 @@ public class ScheduleListFragment extends Fragment {
 	/*
 	 * Request data by group from API
 	 */
-	public void loadAll () {
+	public void loadAll() {
 		String groupId = u.getString(DrawerActivity.KEY_GID);
 		progress = u.showProgress(getString(R.string.alert_updating));
 
@@ -130,6 +130,10 @@ public class ScheduleListFragment extends Fragment {
 	 */
 	public void init (final Schedule data) {
 		isParityNow = (Calendar.getInstance().get(Calendar.WEEK_OF_YEAR) % 2) + 1;
+
+		if (data.response.correction) {
+			isParityNow = isParityNow == 1 ? 2 : 1;
+		}
 
 		mContentUpdated.setText(String.format(getString(R.string.schedule_from), data.response.editDate));
 		mContentSettings.setVisibility(View.VISIBLE);
